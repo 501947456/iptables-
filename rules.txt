@@ -17,3 +17,10 @@ iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --weekdays 6,7 -j REJECT
 
 iptables -t filter -I INPUT -p tcp --dport 80 -m time --weekdays 5 --monthdays 22,23,24,25,26,27 -j REJECT 
 iptables -t filter -I INPUT -p tcp --dport 80 -m time --datestart 2017-12-24 --datestop 2017-12-27 -j REJECT 
+
+
+iptables -t filter -I INPUT -p icmp -m icmp --icmp-type 8/0 -j REJECT
+iptables -t filter -I INPUT -p icmp --icmp-type 8 -j REJECT
+iptables -t filter -I OUTPUT -p icmp -m icmp --icmp-type 0/0 -j REJECT
+iptables -t filter -I OUTPUT -p icmp --icmp-type 0 -j REJECT
+iptables -t filter -I INPUT -p icmp --icmp-type "echo-request" -j REJECT
